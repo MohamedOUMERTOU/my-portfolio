@@ -1,125 +1,149 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { logos, socialMediaUrl } from "../Details";
+import { logos, socialMediaUrl, personalDetails } from "../Details";
 import { useLanguage } from "../i18n/LanguageContext";
+
+const navItems = [
+  { to: "/", key: "home" },
+  { to: "/about", key: "about" },
+  { to: "/technologies", key: "technologies" },
+  { to: "/projects", key: "projects" },
+  { to: "/contact", key: "contact" },
+];
+
+const linkClass = ({ isActive }) =>
+  `block rounded-full px-4 py-2 text-sm font-medium transition ${
+    isActive
+      ? "bg-gradient text-white shadow-md shadow-purple-500/30"
+      : "text-dark-content dark:text-light-content hover:text-dark-heading dark:hover:text-white hover:bg-slate-100 dark:hover:bg-dark-card"
+  }`;
+
+const iconButton =
+  "flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 text-dark-heading dark:text-light-heading transition hover:-translate-y-0.5 hover:border-transparent hover:bg-gradient hover:text-white";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { linkdein, github } = socialMediaUrl;
   const { lang, toggleLang, t } = useLanguage();
-  const toggleClass = () => {
-    setIsOpen(!isOpen);
-  };
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const closeMenu = () => setIsOpen(false);
+
+  const langSwitch = (
+    <button
+      type="button"
+      onClick={toggleLang}
+      title={t("switchTo")}
+      aria-label={t("switchTo")}
+      className="flex items-center rounded-full border border-slate-200 dark:border-slate-700 p-1 text-xs font-semibold"
+    >
+      {["fr", "en"].map((code) => (
+        <span
+          key={code}
+          className={`rounded-full px-2.5 py-1 uppercase transition ${
+            lang === code ? "bg-gradient text-white" : "text-dark-content dark:text-light-content"
+          }`}
+        >
+          {code}
+        </span>
+      ))}
+    </button>
+  );
+
+  const socials = (
+    <>
+      <a href={linkdein} target="_blank" rel="noreferrer noopener" aria-label="LinkedIn" className={iconButton}>
+        <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
+        </svg>
+      </a>
+      <a href={github} target="_blank" rel="noreferrer noopener" aria-label="GitHub" className={iconButton}>
+        <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57l-.02-2.04c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.43.37.82 1.1.82 2.22l-.02 3.29c0 .32.22.7.83.57A12 12 0 0 0 12 .3" />
+        </svg>
+      </a>
+    </>
+  );
 
   return (
-    <header className="container mx-auto md:flex justify-between py-2 max-width">
-      <div className="flex justify-between items-center py-2 md:py-10">
-        <NavLink to="/">
-          <img className="w-14" src={logos.logogradient} alt="logo" />
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled || isOpen
+          ? "bg-slate-50/80 dark:bg-dark-mode/80 backdrop-blur-md shadow-sm shadow-slate-200/60 dark:shadow-black/40 border-b border-slate-200/70 dark:border-slate-800"
+          : "bg-transparent border-b border-transparent"
+      }`}
+    >
+      <div className="container mx-auto max-width flex items-center justify-between py-3 md:py-4">
+        <NavLink to="/" onClick={closeMenu} className="flex items-center gap-3">
+          <img className="w-10 md:w-11" src={logos.logogradient} alt="logo" />
+          <span className="font-heading font-bold tracking-tight text-gradient text-lg hidden sm:inline">
+            {personalDetails.name}
+          </span>
         </NavLink>
-        <div onClick={toggleClass} className="cursor-pointer">
-          <svg
-            className="stroke-dark-heading dark:stroke-white md:hidden"
-            width="25"
-            height="20"
-            viewBox="0 0 16 13"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M1.4375 1.3125H14.5625M1.4375 11.3125H14.5625H1.4375ZM1.4375 6.3125H14.5625H1.4375Z"
-              strokeWidth="1.875"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+
+        {/* Desktop navigation */}
+        <nav className="hidden lg:block">
+          <ul className="flex items-center gap-1 rounded-full bg-white/60 dark:bg-dark-card/60 p-1 border border-slate-200/70 dark:border-slate-700/70">
+            {navItems.map(({ to, key }) => (
+              <li key={key}>
+                <NavLink to={to} end={to === "/"} className={linkClass}>
+                  {t(`nav.${key}`)}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="hidden lg:flex items-center gap-3">
+          {socials}
+          {langSwitch}
         </div>
+
+        {/* Mobile menu button */}
+        <button
+          type="button"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Menu"
+          aria-expanded={isOpen}
+          className="lg:hidden flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700"
+        >
+          <div className="relative h-4 w-5">
+            <span className={`absolute left-0 h-0.5 w-5 rounded bg-dark-heading dark:bg-white transition-all duration-300 ${isOpen ? "top-2 rotate-45" : "top-0"}`} />
+            <span className={`absolute left-0 top-2 h-0.5 w-5 rounded bg-dark-heading dark:bg-white transition-all duration-300 ${isOpen ? "opacity-0" : "opacity-100"}`} />
+            <span className={`absolute left-0 h-0.5 w-5 rounded bg-dark-heading dark:bg-white transition-all duration-300 ${isOpen ? "top-2 -rotate-45" : "top-4"}`} />
+          </div>
+        </button>
       </div>
-      <nav className={` ${!isOpen ? "hidden" : null} text-center md:flex justify-between`}>
-        <ul className="dark:text-light-content font-medium md:flex items-center md:space-x-5 md:mr-10">
-          <li className="pb-1 md:pb-0">
-            <NavLink to="/" onClick={toggleClass}>
-              {t("nav.home")}
-            </NavLink>
-          </li>
-          <li className="pb-1 md:pb-0">
-            <NavLink to="/about" onClick={toggleClass}>
-              {t("nav.about")}
-            </NavLink>
-          </li>
-          <li className="pb-1 md:pb-0">
-            <NavLink to="/technologies" onClick={toggleClass}>
-              {t("nav.technologies")}
-            </NavLink>
-          </li>
-          <li className="pb-1 md:pb-0">
-            <NavLink to="/projects" onClick={toggleClass}>
-              {t("nav.projects")}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/contact" onClick={toggleClass}>
-              {t("nav.contact")}
-            </NavLink>
-          </li>
-        </ul>
-        <ul className="flex justify-evenly items-center my-5 md:my-0 md:space-x-5 md:mr-5">
-          <li>
-            <button
-              type="button"
-              onClick={toggleLang}
-              title={t("switchTo")}
-              aria-label={t("switchTo")}
-              className="flex items-center rounded-full border border-slate-300 dark:border-slate-600 p-1 text-xs font-semibold"
-            >
-              {["fr", "en"].map((code) => (
-                <span
-                  key={code}
-                  className={`rounded-full px-2.5 py-1 uppercase transition ${
-                    lang === code
-                      ? "bg-gradient text-white"
-                      : "text-dark-content dark:text-light-content"
-                  }`}
-                >
-                  {code}
-                </span>
-              ))}
-            </button>
-          </li>
-          <li>
-            <a href={linkdein} target="_blank" rel="noreferrer noopener">
-              <svg
-                className="dark:fill-light-heading fill-dark-heading"
-                width="30"
-                height="30"
-                viewBox="0 0 30 30"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M15 0.599976C7.04701 0.599976 0.600006 7.04698 0.600006 15C0.600006 22.953 7.04701 29.4 15 29.4C22.953 29.4 29.4 22.953 29.4 15C29.4 7.04698 22.953 0.599976 15 0.599976ZM11.475 20.9685H8.55901V11.5845H11.475V20.9685ZM9.99901 10.4325C9.07801 10.4325 8.48251 9.77997 8.48251 8.97297C8.48251 8.14948 9.09601 7.51648 10.0365 7.51648C10.977 7.51648 11.553 8.14948 11.571 8.97297C11.571 9.77997 10.977 10.4325 9.99901 10.4325ZM22.125 20.9685H19.209V15.768C19.209 14.5575 18.786 13.7355 17.7315 13.7355C16.926 13.7355 16.4475 14.292 16.236 14.8275C16.158 15.018 16.1385 15.288 16.1385 15.5565V20.967H13.221V14.577C13.221 13.4055 13.1835 12.426 13.1445 11.583H15.678L15.8115 12.8865H15.87C16.254 12.2745 17.1945 11.3715 18.768 11.3715C20.6865 11.3715 22.125 12.657 22.125 15.42V20.9685Z" />
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href={github} target="_blank" rel="noreferrer noopener">
-              <svg
-                className="dark:fill-light-heading fill-dark-heading"
-                width="30"
-                height="30"
-                viewBox="0 0 30 30"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M15 0C6.7125 0 0 6.7125 0 15C0 21.6375 4.29375 27.2437 10.2563 29.2313C11.0063 29.3625 11.2875 28.9125 11.2875 28.5188C11.2875 28.1625 11.2688 26.9813 11.2688 25.725C7.5 26.4188 6.525 24.8062 6.225 23.9625C6.05625 23.5312 5.325 22.2 4.6875 21.8438C4.1625 21.5625 3.4125 20.8687 4.66875 20.85C5.85 20.8313 6.69375 21.9375 6.975 22.3875C8.325 24.6562 10.4812 24.0187 11.3438 23.625C11.475 22.65 11.8688 21.9937 12.3 21.6187C8.9625 21.2437 5.475 19.95 5.475 14.2125C5.475 12.5813 6.05625 11.2313 7.0125 10.1813C6.8625 9.80625 6.3375 8.26875 7.1625 6.20625C7.1625 6.20625 8.41875 5.8125 11.2875 7.74375C12.4875 7.40625 13.7625 7.2375 15.0375 7.2375C16.3125 7.2375 17.5875 7.40625 18.7875 7.74375C21.6562 5.79375 22.9125 6.20625 22.9125 6.20625C23.7375 8.26875 23.2125 9.80625 23.0625 10.1813C24.0188 11.2313 24.6 12.5625 24.6 14.2125C24.6 19.9688 21.0938 21.2437 17.7563 21.6187C18.3 22.0875 18.7688 22.9875 18.7688 24.3937C18.7688 26.4 18.75 28.0125 18.75 28.5188C18.75 28.9125 19.0312 29.3813 19.7812 29.2313C22.759 28.2259 25.3465 26.3121 27.1796 23.7592C29.0127 21.2063 29.9991 18.1429 30 15C30 6.7125 23.2875 0 15 0Z"
-                />
-              </svg>
-            </a>
-          </li>
-        </ul>
-      </nav>
+
+      {/* Mobile navigation */}
+      <div
+        className={`lg:hidden overflow-hidden transition-all duration-300 ${
+          isOpen ? "max-h-[28rem] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <nav className="container mx-auto max-width pb-5">
+          <ul className="flex flex-col gap-1">
+            {navItems.map(({ to, key }) => (
+              <li key={key}>
+                <NavLink to={to} end={to === "/"} onClick={closeMenu} className={linkClass}>
+                  {t(`nav.${key}`)}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+          <div className="flex items-center justify-between pt-4 mt-3 border-t border-slate-200 dark:border-slate-700">
+            <div className="flex gap-3">{socials}</div>
+            {langSwitch}
+          </div>
+        </nav>
+      </div>
     </header>
   );
 }

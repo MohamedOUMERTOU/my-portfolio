@@ -79,10 +79,20 @@ function Home() {
         >
           {tr(tagline)}
         </h2>
+      </div>
+      <div
+        ref={myimageref}
+        className="mt-10 md:mt-0 flex flex-col items-center gap-6 md:min-w-fit md:pl-10"
+      >
+        <img
+          className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover border-4 border-sky-400 shadow-lg"
+          src={img}
+          alt="Oumertou Mohamed"
+        />
         <a
           href={cv}
           download="CV-OUMERTOU-MOHAMED.pdf"
-          className="inline-flex items-center gap-2 mt-8 rounded-xl bg-gradient px-8 py-3 font-semibold text-white shadow-lg shadow-purple-500/30 transition hover:opacity-90 hover:shadow-purple-500/50"
+          className="inline-flex items-center gap-2 rounded-xl bg-gradient px-8 py-3 font-semibold text-white shadow-lg shadow-purple-500/30 transition hover:-translate-y-0.5 hover:opacity-90 hover:shadow-purple-500/50"
         >
           <svg className="h-5 w-5 fill-white" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3ZM5 18h14v2H5v-2Z" />
@@ -90,14 +100,6 @@ function Home() {
           {t("home.downloadCv")}
         </a>
       </div>
-      <div className="mt-5 md:mt-0 flex justify-center md:justify-end">
-  <img
-    ref={myimageref}
-    className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover border-4 border-sky-400 shadow-lg"
-    src={img}
-    alt="Oumertou Mohamed"
-  />
-</div>
 
       {/* <div className="mt-5 md:mt-0">
         <img ref={myimageref} className="w-1/2 md:ml-auto" src={img} alt="Pavan MG" />

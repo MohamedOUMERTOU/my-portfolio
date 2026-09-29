@@ -10,7 +10,7 @@ import { LanguageProvider } from "./i18n/LanguageContext";
 function App() {
   return (
     <LanguageProvider>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />

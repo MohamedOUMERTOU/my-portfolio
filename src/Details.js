@@ -8,6 +8,7 @@ import profile from "./assets/profile.jpg";
 import erpImage from "./assets/projects/erp.svg";
 import ocrImage from "./assets/projects/ocr.svg";
 import chatbotImage from "./assets/projects/chatbot.svg";
+import gedImage from "./assets/projects/ged.svg";
 
 // Devicon CDN for tech stack icons
 const icon = (name, variant = "original") =>
@@ -173,6 +174,22 @@ export const techStackDetails = [
 
 // Enter your Project Details here (image, previewLink and githubLink are optional)
 export const projectDetails = [
+  {
+    title: {
+      en: "Electronic Document Management (EDM)",
+      fr: "Gestion Électronique des Documents (GED)",
+    },
+    image: gedImage,
+    description: {
+      en: `Web platform to digitize, store, organize and search business documents: folder tree,
+document versioning, metadata and full-text search, validation workflow, and user roles and
+access rights, with files kept in object storage.`,
+      fr: `Plateforme web pour numériser, stocker, classer et rechercher les documents métier :
+arborescence de dossiers, versionnage des documents, métadonnées et recherche plein texte,
+circuit de validation, gestion des rôles et droits d'accès, avec stockage objet des fichiers.`,
+    },
+    techstack: "React, Spring Boot, PostgreSQL, MinIO, Docker, Nginx",
+  },
   {
     title: { en: "Insurance Management ERP", fr: "ERP de gestion des assurances" },
     image: erpImage,
