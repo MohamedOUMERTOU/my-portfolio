@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" font-family="Inter, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#db2777"/>
+      <stop offset="0.5" stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <filter id="sh" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#0b1120" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="90" cy="70" r="130" fill="#fff" opacity="0.08"/>
+  <circle cx="740" cy="400" r="150" fill="#fff" opacity="0.08"/>
+
+  <!-- chat window -->
+  <g filter="url(#sh)">
+    <rect x="200" y="40" width="400" height="370" rx="20" fill="#f8fafc"/>
+  </g>
+  <rect x="200" y="40" width="400" height="60" rx="20" fill="#0f172a"/>
+  <rect x="200" y="80" width="400" height="20" fill="#0f172a"/>
+  <circle cx="236" cy="70" r="16" fill="url(#g)"/>
+  <rect x="228" y="64" width="16" height="11" rx="4" fill="#fff"/>
+  <circle cx="232" cy="69.5" r="2" fill="#a855f7"/>
+  <circle cx="240" cy="69.5" r="2" fill="#a855f7"/>
+  <text x="264" y="66" fill="#f8fafc" font-size="14" font-weight="600">Assistant</text>
+  <circle cx="268" cy="80" r="4" fill="#34d399"/>
+  <text x="277" y="84" fill="#94a3b8" font-size="11">online · Rasa NLU</text>
+
+  <!-- user message -->
+  <rect x="330" y="120" width="250" height="44" rx="16" fill="url(#g)"/>
+  <text x="346" y="147" fill="#fff" font-size="13">I want to book a flight to Paris</text>
+
+  <!-- NLU annotation -->
+  <g font-size="11" font-weight="600">
+    <rect x="330" y="172" width="118" height="22" rx="11" fill="#ede9fe"/>
+    <text x="340" y="187" fill="#7c3aed">intent: book_flight</text>
+    <rect x="456" y="172" width="124" height="22" rx="11" fill="#e0f2fe"/>
+    <text x="466" y="187" fill="#0369a1">entity: city=Paris</text>
+  </g>
+
+  <!-- bot reply -->
+  <rect x="220" y="212" width="250" height="62" rx="16" fill="#e2e8f0"/>
+  <text x="236" y="237" fill="#0f172a" font-size="13">Sure! For which date would</text>
+  <text x="236" y="257" fill="#0f172a" font-size="13">you like to travel to Paris?</text>
+
+  <!-- user message 2 -->
+  <rect x="440" y="290" width="140" height="44" rx="16" fill="url(#g)"/>
+  <text x="456" y="317" fill="#fff" font-size="13">Next Monday</text>
+
+  <!-- typing -->
+  <rect x="220" y="348" width="70" height="32" rx="16" fill="#e2e8f0"/>
+  <circle cx="240" cy="364" r="4" fill="#94a3b8"/>
+  <circle cx="255" cy="364" r="4" fill="#a855f7"/>
+  <circle cx="270" cy="364" r="4" fill="#94a3b8"/>
+
+  <!-- floating tags -->
+  <g font-size="13" font-weight="600" fill="#fff">
+    <rect x="40" y="170" width="120" height="36" rx="18" fill="#0f172a" opacity="0.85"/>
+    <text x="100" y="193" text-anchor="middle">NLU / NLP</text>
+    <rect x="50" y="250" width="100" height="36" rx="18" fill="#0f172a" opacity="0.85"/>
+    <text x="100" y="273" text-anchor="middle">Django</text>
+    <rect x="640" y="130" width="120" height="36" rx="18" fill="#0f172a" opacity="0.85"/>
+    <text x="700" y="153" text-anchor="middle">Dialogues</text>
+    <rect x="650" y="210" width="100" height="36" rx="18" fill="#0f172a" opacity="0.85"/>
+    <text x="700" y="233" text-anchor="middle">Actions</text>
+  </g>
+</svg>
