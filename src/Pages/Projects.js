@@ -1,13 +1,15 @@
 import React from "react";
 import Project from "../Components/Project";
 import { projectDetails } from "../Details";
+import { useLanguage } from "../i18n/LanguageContext";
 
 function Projects() {
+  const { t } = useLanguage();
   return (
     <main className="container mx-auto max-width pt-10 mb-20">
       <section>
-        <h1 className="text-2xl text-dark-heading dark:text-light-heading md:text-4xl xl:text-5xl xl:leading-tight font-bold">
-          Projects
+        <h1 className="section-title">
+          {t("projects.title")}
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10">
           {React.Children.toArray(

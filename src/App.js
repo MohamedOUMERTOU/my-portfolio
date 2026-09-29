@@ -6,9 +6,11 @@ import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Projects from "./Pages/Projects";
 import Technologies from "./Pages/Technologies";
+import { LanguageProvider } from "./i18n/LanguageContext";
 function App() {
   return (
-    <Router>
+    <LanguageProvider>
+      <Router>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -18,7 +20,8 @@ function App() {
         <Route path="/technologies" element={<Technologies />} />
       </Routes>
       <Footer />
-    </Router>
+      </Router>
+    </LanguageProvider>
   );
 }
 export default App;

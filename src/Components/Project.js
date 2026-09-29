@@ -1,16 +1,19 @@
 import React from "react";
+import { useLanguage } from "../i18n/LanguageContext";
 
 function Project({ title, image, description, techstack, previewLink, githubLink }) {
+  const { t, tr } = useLanguage();
   return (
-    <article className="rounded-xl mt-10 overflow-hidden shadow-xl shadow-slate-300 dark:shadow-slate-900">
-      <img src={image} alt="" loading="lazy" />
-      <div className="dark:bg-dark-card p-4">
-        <h1 className="dark:text-light-heading font-semibold text-lg pt-1">{title}</h1>
-        <p className="text-content pt-4 font-light">{description}</p>
+    <article className="rounded-xl mt-10 overflow-hidden shadow-xl shadow-slate-200 dark:shadow-black/40">
+      {image && <img src={image} alt={tr(title)} loading="lazy" />}
+      <div className="bg-white dark:bg-dark-card p-4 h-full">
+        <h1 className="dark:text-light-heading font-semibold text-lg pt-1">{tr(title)}</h1>
+        <p className="text-content pt-4 text-sm md:text-base">{tr(description)}</p>
         <h3 className="text-dark-heading dark:text-light-heading font-medium pt-4">
-          Tech Stack : <span className="font-light">{techstack}</span>
+          {t("projects.techStack")} : <span className="font-light">{techstack}</span>
         </h3>
         <div className="flex justify-between items-center mt-5">
+          {previewLink && (
           <div className="flex items-center">
             <svg
               className="stroke-dark-heading dark:stroke-white inline-block min-w-fit"
@@ -39,9 +42,11 @@ function Project({ title, image, description, techstack, previewLink, githubLink
               rel="noreferrer noopener"
               className="underline pl-2 font-light dark:text-white"
             >
-              Live Preview
+              {t("projects.livePreview")}
             </a>
           </div>
+          )}
+          {githubLink && (
           <div className="flex items-center">
             <svg
               className="dark:fill-light-heading fill-dark-heading inline-block min-w-fit"
@@ -64,9 +69,10 @@ function Project({ title, image, description, techstack, previewLink, githubLink
               rel="noreferrer noopener"
               className="underline pl-2 font-light dark:text-white"
             >
-              View Code
+              {t("projects.viewCode")}
             </a>
           </div>
+          )}
         </div>
       </div>
     </article>
