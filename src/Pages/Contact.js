@@ -5,7 +5,7 @@ import { useLanguage } from "../i18n/LanguageContext";
 const initialForm = { name: "", email: "", subject: "", message: "" };
 
 const inputClass =
-  "w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-dark-mode px-4 py-3 text-dark-heading dark:text-light-heading placeholder-slate-400 dark:placeholder-slate-500 transition focus:outline-none focus:border-transparent focus:ring-2 focus:ring-purple-500";
+  "w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-dark-mode/70 px-4 py-3 text-dark-heading dark:text-light-heading placeholder-slate-400 dark:placeholder-slate-500 transition focus:outline-none focus:border-transparent focus:ring-2 focus:ring-purple-500";
 
 const labelClass = "block text-sm font-medium text-dark-heading dark:text-light-heading mb-2";
 
@@ -23,7 +23,7 @@ const icons = {
 
 function InfoCard({ icon, title, children }) {
   return (
-    <div className="flex items-center gap-4 rounded-2xl bg-white dark:bg-dark-card p-5 shadow-lg shadow-slate-200 dark:shadow-slate-900 transition hover:-translate-y-1">
+    <div className="flex items-center gap-4 glass rounded-2xl p-5 shadow-lg shadow-slate-200/60 dark:shadow-black/40 transition hover:-translate-y-1">
       <div className="flex h-12 w-12 min-w-[3rem] items-center justify-center rounded-full bg-gradient">
         <svg className="h-6 w-6 fill-white" viewBox="0 0 24 24" aria-hidden="true">
           {icons[icon]}
@@ -102,7 +102,7 @@ function Contact() {
           </InfoCard>
 
           <div className="rounded-2xl bg-gradient p-[1px]">
-            <div className="rounded-2xl bg-white dark:bg-dark-card p-5">
+            <div className="rounded-2xl bg-white/90 dark:bg-dark-card/90 backdrop-blur-md p-5">
               <h2 className="font-semibold text-dark-heading dark:text-light-heading">{t("contact.findMe")}</h2>
               <div className="flex gap-3 pt-3">
                 <a
@@ -128,7 +128,7 @@ function Contact() {
 
         <form
           onSubmit={handleSubmit}
-          className="lg:col-span-3 rounded-2xl bg-white dark:bg-dark-card p-6 md:p-8 shadow-xl shadow-slate-200 dark:shadow-slate-900 space-y-5"
+          className="lg:col-span-3 glass rounded-2xl p-6 md:p-8 shadow-xl shadow-slate-200/60 dark:shadow-black/40 space-y-5"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>

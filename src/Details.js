@@ -28,6 +28,12 @@ export const personalDetails = {
     en: "Full Stack Developer & AI Engineer",
     fr: "Développeur Full Stack & Ingénieur IA",
   },
+  // Roles typed one after another in the home hero
+  roles: {
+    en: ["Full Stack Developer", "AI Engineer", "Spring Boot & React Specialist", "Local LLM Tinkerer"],
+    fr: ["Développeur Full Stack", "Ingénieur IA", "Spécialiste Spring Boot & React", "Passionné de LLM locaux"],
+  },
+  yearsOfExperience: 4,
   img: profile,
   // CV file placed in the public folder
   cv: `${process.env.PUBLIC_URL}/CV-OUMERTOU-MOHAMED.pdf`,

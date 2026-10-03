@@ -4,7 +4,7 @@ import { useLanguage } from "../i18n/LanguageContext";
 function Work({ position, company, location, type, duration, description }) {
   const { tr } = useLanguage();
   return (
-    <article className="relative h-full overflow-hidden rounded-2xl bg-white dark:bg-dark-card p-6 pl-7 shadow-lg shadow-slate-200 dark:shadow-black/40 transition hover:-translate-y-1 hover:shadow-xl">
+    <article className="glass relative h-full overflow-hidden rounded-2xl p-6 pl-7 shadow-lg shadow-slate-200/60 dark:shadow-black/40">
       <span className="absolute left-0 top-0 h-full w-1.5 bg-gradient" aria-hidden="true" />
       <div className="flex justify-between items-start gap-3">
         <h3 className="font-semibold text-dark-heading dark:text-light-heading md:text-lg lg:text-xl">{tr(position)}</h3>
@@ -46,7 +46,7 @@ function Work({ position, company, location, type, duration, description }) {
         <p className="text-content text-xs md:text-sm font-light pl-1 min-w-fit">{tr(duration)}</p>
       </div>
       {tr(description) && (
-        <ul className="list-disc pl-5 pt-4 mt-4 space-y-2 border-t border-slate-200 dark:border-slate-700">
+        <ul className="list-disc pl-5 pt-4 mt-4 space-y-2 border-t border-slate-200/80 dark:border-slate-700/60">
           {React.Children.toArray(
             tr(description).map((item) => (
               <li className="text-content text-sm md:text-base">{item}</li>

@@ -51,6 +51,86 @@ body {
       radial-gradient(40rem 30rem at 50% 100%, rgba(219, 39, 119, 0.08), transparent 70%);
   }
 }
+
+/* Frosted glass surface */
+.glass {
+  @apply bg-white/75 dark:bg-dark-card/70 backdrop-blur-md border border-white/60 dark:border-white/5;
+}
+
+/* ---------- 3D tilt cards ---------- */
+.tilt-scene {
+  perspective: 1100px;
+}
+.tilt-card {
+  --rx: 0deg;
+  --ry: 0deg;
+  --gx: 50%;
+  --gy: 50%;
+  --glare: 0;
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: var(--glare);
+  transition: opacity 0.35s;
+  background: radial-gradient(circle at var(--gx) var(--gy), rgba(255, 255, 255, 0.28), transparent 55%);
+  mix-blend-mode: overlay;
+}
+/* children lifted off the card surface */
+.depth-1 { transform: translateZ(25px); }
+.depth-2 { transform: translateZ(45px); }
+.depth-3 { transform: translateZ(70px); }
+
+/* ---------- Page transitions ---------- */
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(24px) scale(0.985); filter: blur(6px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+.page-in {
+  animation: page-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* ---------- Home hero ---------- */
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.ring-spin {
+  animation: spin-slow 8s linear infinite;
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.float-y {
+  animation: float-y 6s ease-in-out infinite;
+}
+@keyframes caret {
+  50% { opacity: 0; }
+}
+.caret::after {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 0.9em;
+  margin-left: 4px;
+  vertical-align: -0.1em;
+  background: currentColor;
+  animation: caret 1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-in, .ring-spin, .float-y, .caret::after { animation: none; }
+  .tilt-card { transform: none; }
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 body::-webkit-scrollbar {
   display: none;

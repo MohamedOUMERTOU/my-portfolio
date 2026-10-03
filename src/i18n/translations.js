@@ -9,9 +9,15 @@ const translations = {
       contact: "Contact",
     },
     home: {
-      greeting: "Hi,👋",
-      myNameIs: "My Name is",
+      greeting: "Hi 👋, I'm",
+      available: "Available for new opportunities",
+      intro:
+        "I design and ship end-to-end products — from pixel-perfect React interfaces to Spring Boot & Django APIs, databases and AI pipelines running on local LLMs.",
       downloadCv: "Download CV",
+      viewProjects: "View my work",
+      years: "Years of experience",
+      projects: "Featured projects",
+      technologies: "Technologies mastered",
     },
     about: {
       title: "About Me",
@@ -21,9 +27,12 @@ const translations = {
     tech: {
       title: "Tech Stack",
       subtitle: "Technologies I've been working with recently",
+      sphereHint: "Drag the globe to explore",
+      sphereLabel: "Interactive 3D globe of the technologies I use",
     },
     projects: {
       title: "Projects",
+      subtitle: "A selection of systems I've designed and built, from enterprise platforms to AI pipelines.",
       techStack: "Tech Stack",
       livePreview: "Live Preview",
       viewCode: "View Code",
@@ -70,9 +79,15 @@ const translations = {
       contact: "Contact",
     },
     home: {
-      greeting: "Bonjour,👋",
-      myNameIs: "Je m'appelle",
+      greeting: "Bonjour 👋, je suis",
+      available: "Disponible pour de nouvelles opportunités",
+      intro:
+        "Je conçois et livre des produits de bout en bout — des interfaces React soignées aux API Spring Boot & Django, bases de données et pipelines IA sur LLM locaux.",
       downloadCv: "Télécharger mon CV",
+      viewProjects: "Voir mes projets",
+      years: "Années d'expérience",
+      projects: "Projets phares",
+      technologies: "Technologies maîtrisées",
     },
     about: {
       title: "À propos de moi",
@@ -82,9 +97,12 @@ const translations = {
     tech: {
       title: "Compétences techniques",
       subtitle: "Les technologies avec lesquelles je travaille récemment",
+      sphereHint: "Faites tourner le globe pour explorer",
+      sphereLabel: "Globe 3D interactif des technologies que j'utilise",
     },
     projects: {
       title: "Projets",
+      subtitle: "Une sélection de systèmes que j'ai conçus et réalisés, des plateformes d'entreprise aux pipelines IA.",
       techStack: "Technologies",
       livePreview: "Voir le projet",
       viewCode: "Voir le code",
